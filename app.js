@@ -21,6 +21,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var upload = require('./routes/upload');
 var session = require('./routes/session');
+var header = require('./routes/header');
 
 var app = express();
 
@@ -43,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //cookie를 이용한 session 사용
 app.use(cookieSession({
 	name: 'session',
-	keys: ['sjmarine97@gmail.com'],
+	keys: [ ENC_KEY ],
 	
 	// Cookie Options
 	maxAge: 2 * 60 * 60 * 1000	// 2 hours
@@ -54,6 +55,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/upload', upload);
 app.use('/session', session);
+app.use('/header', header);
 
 
 // catch 404 and forward to error handler
@@ -62,6 +64,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+//왜 커밋을 하고 push를 했는데 안되는겨
 
 // error handler
 app.use(function(err, req, res, next) {
