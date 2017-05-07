@@ -1,13 +1,26 @@
+/**
+ * Global 변수 선언
+ */
+const ENC_KEY = "sjmarine97@gmail.com";
+
+/**
+ * Load Modules
+ */
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session');
 
+/**
+ * Router Setup
+ */
 var index = require('./routes/index');
 var users = require('./routes/users');
 var upload = require('./routes/upload');
+var session = require('./routes/session');
 
 var app = express();
 
@@ -15,17 +28,33 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+/**
+ * Middleware Setup
+ */
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(ENC_KEY));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//cookie를 이용한 session 사용
+app.use(cookieSession({
+	name: 'session',
+	keys: ['sjmarine97@gmail.com'],
+	
+	// Cookie Options
+	maxAge: 2 * 60 * 60 * 1000	// 2 hours
+}));
+
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/upload', upload);
+app.use('/session', session);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
