@@ -2,6 +2,8 @@
 Node.js + Express Test
 > Cookie, Session, Request/Response Header Handling
 
+> JSON RESTful API (request, response)
+
 > File Upload
 
 
