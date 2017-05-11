@@ -6,6 +6,8 @@ Node.js + Express Test
 
 > File Upload
 
+> DB handling (transaction), DB Pool
+
 
 # Author
 Sun Kim
