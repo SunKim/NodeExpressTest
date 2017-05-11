@@ -13,6 +13,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session');
+var mysql = require('mysql');
+
 
 /**
  * Router Setup
@@ -24,6 +26,7 @@ var session = require('./routes/session');
 var header = require('./routes/header');
 var cookie = require('./routes/cookie');
 var jsonrequest = require('./routes/jsonrequest');
+var db = require('./routes/db');
 
 var app = express();
 
@@ -65,6 +68,7 @@ app.use('/session', session);
 app.use('/header', header);
 app.use('/cookie', cookie);
 app.use('/jsonrequest', jsonrequest);
+app.use('/db', db);
 
 
 //위의 router에 안 걸리는 애들 catch해서 404로 만든 후 아래의 error handler로 넘겨줌.

@@ -1,0 +1,9 @@
+{
+	"host": "cdn-autogrounddb.cxnrwlgzpfcv.ap-northeast-2.rds.amazonaws.com",
+	"port": "3306",
+	"user": "autogrounddbuser",
+	"password": "dhxhrmfkdns1!)^!#",
+	"database": "suntest",
+	"connectionLimit": 20,
+	"waitForConnections": false
+}
