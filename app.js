@@ -67,23 +67,27 @@ app.use('/cookie', cookie);
 app.use('/jsonrequest', jsonrequest);
 
 
-// catch 404 and forward to error handler
+//위의 router에 안 걸리는 애들 catch해서 404로 만든 후 아래의 error handler로 넘겨줌.
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	//console.error(err.message);
+	console.error(err.status);
+	console.error(err.stack);
+  
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
 });
 
 module.exports = app;
