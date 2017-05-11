@@ -4,6 +4,7 @@ var mysql = require('mysql');
 
 var db_config = require('../properties/db_config.json');
 
+//var conn = mysql.createConnection(db_config);
 var conn = mysql.createConnection({
 	host: db_config.host,
 	port: db_config.port,
@@ -34,14 +35,34 @@ router.get('/insert', function(req, res, next) {
 });
 
 
-router.get('/select', function(req,res){
+router.get('/selectall', function(req,res){
 	//where 사용시 escape 처리
 	//conn.query('select * from users where userid='+mysql.escape(req.params.userid)
 	var query = conn.query('select * from test_user ', function(err,rows) {
 		console.log(rows);
 		res.json(rows);
 	});
-	console.log(query);
+	console.log(query.sql);
+});
+
+router.get('/select', function(req,res){
+	//where 사용시 escape 처리
+	//conn.query('select * from users where userid='+mysql.escape(req.params.userid)
+	var query = conn.query('select * from test_user where userid = ?', [2], function(err,rows) {
+		console.log(rows);
+		res.json(rows);
+	});
+	console.log(query.sql);
+});
+
+router.get('/selectsome', function(req,res){
+	//where 사용시 escape 처리
+	//conn.query('select * from users where userid='+mysql.escape(req.params.userid)
+	var query = conn.query('select * from test_user where userid in (?, ?) ', [1, 2], function(err,rows) {
+		console.log(rows);
+		res.json(rows);
+	});
+	console.log(query.sql);
 });
 
 
