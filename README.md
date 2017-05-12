@@ -8,6 +8,8 @@ Node.js + Express Test
 
 > DB handling (transaction), DB Pool
 
+> Simple Chatting (socket.io)
+
 
 # Author
 Sun Kim
