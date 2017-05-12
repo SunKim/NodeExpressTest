@@ -27,6 +27,7 @@ var cookie = require('./routes/cookie');
 var jsonrequest = require('./routes/jsonrequest');
 var db = require('./routes/db');
 var dbpool = require('./routes/dbpool');
+var simplechat = require('./routes/simplechat');
 
 var app = express();
 
@@ -70,6 +71,7 @@ app.use('/cookie', cookie);
 app.use('/jsonrequest', jsonrequest);
 app.use('/db', db);
 app.use('/dbpool', dbpool);
+app.use('/simplechat', simplechat);
 
 
 //위의 router에 안 걸리는 애들 catch해서 404로 만든 후 아래의 error handler로 넘겨줌.
