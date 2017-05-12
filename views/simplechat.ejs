@@ -2,14 +2,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Socket.io Chat Example</title>
+	<title> <%= title %> </title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
 		<h3> <%= title %> </h3>
 		
-		<p class="bg-success" style="padding:14px;margin:30 0px !important;">창을 2개 이상 띄워서 사용</p>
+		<p class="bg-success" style="padding:14px;margin:30 0px;">창을 2개 이상 띄워서 사용</p>
 		
 		<form class="form-inline">
 			<div class="form-group">
@@ -17,9 +17,13 @@
 				<input type="text" class="form-control" id="msgForm">
 			</div>
 			<button type="submit" class="btn btn-primary">Send</button>
+			<button type="button" class="btn btn-warning" style="display:inline;" id="btnSendInfo">Send Info</button>
 		</form>
+		
+		
 		<div id="chatLogs"></div>
 	</div>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
@@ -28,37 +32,53 @@
 		var socket = io();
 
 		// 서버로 자신의 정보를 전송한다.
-		socket.emit("login", {
-			// name: "ungmo2",
+		socket.emit('login', {
+			// name: 'Sun Kim',
 			name: makeRandomName(),
-			userid: "ungmo2@gmail.com"
+			userid: 'sjmarine97@gmail.com'
 		});
 
-		// 서버로부터의 메시지가 수신되면
-		socket.on("login", function(data) {
-			$("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
+		//서버로부터의 메시지 수신
+		socket.on('login', function(data) {
+			$('#chatLogs').append('<div><strong>' + data + '</strong> has joined</div>');
 		});
 
-		// 서버로부터의 메시지가 수신되면
-		socket.on("chat", function(data) {
+		//서버로부터의 메시지 수신
+		socket.on('chat', function(data) {
 			//alert('chat. msg : ' + data.msg + ' (' + data.from.name + ')');
-			$("#chatLogs").append("<div><strong>" + data.from.name + "</strong> : " + data.msg + "</div>");
+			$('#chatLogs').append('<div><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
+		});
+		
+		//서버로부터의 메시지 수신
+		socket.on('senInfo', function(data) {
+			$('#chatLogs').append('<p class="bg-success">Info received from : ' + data.from.name + '</p>');
+		});
+		
+		//서버로부터의 메시지 수신
+		socket.on('sendInfo', function(data) {
+			$('#chatLogs').append('<p class="bg-success">Info received from : ' + data.from.name + '</p>');
+			//$('#chatLogs').append('<p class="bg-success">Info received</p>');
 		});
 
 		// Send 버튼이 클릭되면
-		$("form").submit(function(e) {
+		$('form').submit(function(e) {
 			e.preventDefault();
-			var $msgForm = $("#msgForm");
+			var $msgForm = $('#msgForm');
 
 			// 서버로 메시지를 전송한다.
-			socket.emit("chat", { msg: $msgForm.val() });
-			$msgForm.val("");
+			socket.emit('chat', { msg: $msgForm.val() });
+			$msgForm.val('');
+		});
+
+		//btnSendInfo 버튼 클릭시
+		$('#btnSendInfo').click(function(e) {
+			socket.emit('sendInfo', {});
 		});
 
 		function makeRandomName(){
-			var name = "";
-			var possible = "abcdefghijklmnopqrstuvwxyz";
-			for( var i = 0; i < 3; i++ ) {
+			var name = '';
+			var possible = 'abcdefghijklmnopqrstuvwxyz';
+			for( var i = 0; i < 5; i++ ) {
 				name += possible.charAt(Math.floor(Math.random() * possible.length));
 			}
 			return name;
