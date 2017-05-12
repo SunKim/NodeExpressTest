@@ -21,7 +21,7 @@
 				
 				<% contentList.forEach(function(content) { %>
 					<tr>
-						<td><strong><%= content.uri %></strong></td>
+						<td><strong><a href="javascript:goToFunction('<%= content.uri %>')"><%= content.uri %></strong></a></td>
 						<td><%= content.cmt %></td>
 					</tr>
 				<% }); %>
@@ -32,8 +32,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			alert('init');
+			//alert('init');
 		});
+
+		function goToFunction(uri) {
+			//alert('uri : ' + uri);
+			document.location.href = uri;
+		}
 	</script>
 </body>
 </html>
