@@ -26,7 +26,7 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 //connection event handler
-//connection이 수립되면 event handler function의 인자로 socket인 들어온다
+//connection이 수립되면 event handler function의 인자로 socket인 들어옴
 io.on('connection', function(socket) {
 
 	// 접속한 클라이언트의 정보가 수신되면
@@ -47,7 +47,7 @@ io.on('connection', function(socket) {
 		
 		io.emit('sendInfo', { 
 			from : {
-				name: socket.name,
+				name: socket.name,			//login시 이미 socket.name을 설정했음.
 				userid: socket.userid
 			}
 		});

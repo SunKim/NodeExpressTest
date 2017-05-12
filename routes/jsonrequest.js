@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
 
 	if ( typeof json.name == 'undefined' || typeof json.address == 'undefined' ) {
 		result = 'fail';
-		error = 'request의 JSON에 name, address 필드가 없습니다.';
+		error = 'request의 JSON에 name, address 필드가 없습니다. Postman 등의 툴을 통해 PUT method로 name/address 정보를 포함한 json body 요청이 필요합니다.';
 	}
 	
 	//response 설정

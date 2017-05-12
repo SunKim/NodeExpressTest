@@ -12,6 +12,6 @@ Node.js + Express Test
 
 
 # Author
-Sun Kim
+Sun Kim, Seoul, Korea
 
 sjmarine97@gmail.com

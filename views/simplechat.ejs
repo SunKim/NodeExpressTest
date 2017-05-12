@@ -48,7 +48,7 @@
 			//alert('chat. msg : ' + data.msg + ' (' + data.from.name + ')');
 			$('#chatLogs').append('<div><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
 		});
-		
+
 		//서버로부터의 메시지 수신
 		socket.on('senInfo', function(data) {
 			$('#chatLogs').append('<p class="bg-success">Info received from : ' + data.from.name + '</p>');
