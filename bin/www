@@ -43,9 +43,9 @@ io.on('connection', function(socket) {
 
 	//클라이언트로부터의 메시지 수신
 	socket.on('sendInfo', function(data) {
-		console.log('sendInfo received from client : '+socket.name+')');
-		
-		io.emit('sendInfo', { 
+		console.log('sendInfo received from client : '+socket.name);
+
+		socket.broadcast.emit('sendInfo', { 
 			from : {
 				name: socket.name,			//login시 이미 socket.name을 설정했음.
 				userid: socket.userid

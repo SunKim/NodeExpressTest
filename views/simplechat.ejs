@@ -4,6 +4,13 @@
 	<meta charset="utf-8">
 	<title> <%= title %> </title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<style>
+		.chatLogs { margin-top:20px; }
+		.chatlog_join { margin:4px; padding:8px; border-radius:8px; border:1px solid grey; }
+		.chatlog_self { margin:4px; padding:8px; border-radius:8px; background:#f4e242; }
+		.chatlog_other { margin:4px; padding:8px; }
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -19,8 +26,7 @@
 			<button type="submit" class="btn btn-primary">Send</button>
 			<button type="button" class="btn btn-warning" style="display:inline;" id="btnSendInfo">Send Info</button>
 		</form>
-		
-		
+
 		<div id="chatLogs"></div>
 	</div>
 	
@@ -30,23 +36,31 @@
 	$(function(){
 		// socket.io 서버에 접속한다
 		var socket = io();
+		var username = makeRandomName();
+		var userid = 'sjmarine97@gmail.com';
 
 		// 서버로 자신의 정보를 전송한다.
 		socket.emit('login', {
 			// name: 'Sun Kim',
-			name: makeRandomName(),
-			userid: 'sjmarine97@gmail.com'
+			name: username,
+			userid: userid
 		});
 
 		//서버로부터의 메시지 수신
 		socket.on('login', function(data) {
-			$('#chatLogs').append('<div><strong>' + data + '</strong> has joined</div>');
+			$('#chatLogs').append('<div class="chatlog_join"><strong>' + data + '</strong> has joined</div>');
 		});
 
 		//서버로부터의 메시지 수신
 		socket.on('chat', function(data) {
 			//alert('chat. msg : ' + data.msg + ' (' + data.from.name + ')');
-			$('#chatLogs').append('<div><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
+			
+			if (data.from.name == username) {
+				$('#chatLogs').append('<div class="chatlog_self"><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
+			} else {
+				$('#chatLogs').append('<div class="chatlog_other"><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
+			}
+			
 		});
 
 		//서버로부터의 메시지 수신
