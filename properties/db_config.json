@@ -1,9 +1,9 @@
 {
-	"host": "cdn-autogrounddb.cxnrwlgzpfcv.ap-northeast-2.rds.amazonaws.com",
+	"host": "freetier-mariadb1.cct2m3hkhlp6.us-west-2.rds.amazonaws.com",
 	"port": "3306",
-	"user": "autogrounddbuser",
-	"password": "dhxhrmfkdns1!)^!#",
-	"database": "suntest",
+	"user": "root",
+	"password": "aC8piqewi",
+	"database": "fbay",
 	"connectionLimit": 20,
 	"waitForConnections": false
 }
