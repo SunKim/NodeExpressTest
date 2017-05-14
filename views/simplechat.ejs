@@ -8,7 +8,7 @@
 	<style>
 		.chatLogs { margin-top:20px; }
 		.chatlog_join { margin:4px; padding:8px; border-radius:8px; border:1px solid grey; }
-		.chatlog_self { margin:4px; padding:8px; border-radius:8px; background:#f4e242; }
+		.chatlog_self { margin:4px; padding:8px; border-radius:8px; background:#f4e242; width:100%; text-align:right; }
 		.chatlog_other { margin:4px; padding:8px; }
 	</style>
 </head>
@@ -17,7 +17,7 @@
 		<h3> <%= title %> powered by AWS free tier</h3>
 		<h4> Random User Name : <span id="span_username"></span></h4>
 		
-		<p class="bg-success" style="padding:14px;margin:30 0px;">창을 2개 이상 띄워서 사용</p>
+		<p class="bg-success" style="padding:14px;margin:30 0px;">창을 2개 이상 띄워서 사용. 내가 쓴건 노란색 바탕</p>
 		
 		<form class="form-inline">
 			<div class="form-group">
@@ -59,7 +59,7 @@
 			//alert('chat. msg : ' + data.msg + ' (' + data.from.name + ')');
 			
 			if (data.from.name == username) {
-				$('#chatLogs').append('<div class="chatlog_self"><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
+				$('#chatLogs').append('<div class="chatlog_self">' + data.msg + '</div>');
 			} else {
 				$('#chatLogs').append('<div class="chatlog_other"><strong>' + data.from.name + '</strong> : ' + data.msg + '</div>');
 			}
